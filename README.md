@@ -3,8 +3,7 @@
 A modified version of ArrayBlockingQueue that allows one to set a max fill threshold 
 that determines when the queue will be emptied.
 
-The queue expects multiple threads enqueuing data and a single dequeuing thread waiting on the drainTo function.  
-Other uses may be possible but are not tested.
+The queue expects multiple threads enqueuing data and a single thread waiting to deque data via the drainTo function.
 
 ## Usage
 A sample usage is as follows:
