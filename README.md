@@ -26,4 +26,4 @@ while (!mbq.isPoisoned() || (mbq.isPoisoned() && mbq.size() != 0)) {
 
 ## License
  
-MeteredBlockingQueue is licensed under the is licensed under the MIT License. (See LICENSE) 
+MeteredBlockingQueue is licensed under the MIT License. (See LICENSE) 
