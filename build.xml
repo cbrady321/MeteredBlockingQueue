@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="MeteredBlockingQueue" default="jar" basedir=".">
+    <description>Builds and tests MeteredBlockingQueue. No external dependencies.</description>
+
+    <property name="src.dir"          location="src"/>
+    <property name="test.dir"         location="test"/>
+    <property name="build.dir"        location="build"/>
+    <property name="classes.dir"      location="${build.dir}/classes"/>
+    <property name="test.classes.dir" location="${build.dir}/test-classes"/>
+    <property name="dist.dir"         location="dist"/>
+
+    <target name="compile" description="Compile the library">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false"
+               release="8" debug="true">
+            <compilerarg value="-Xlint:unchecked"/>
+        </javac>
+    </target>
+
+    <target name="compile-tests" depends="compile">
+        <mkdir dir="${test.classes.dir}"/>
+        <javac srcdir="${test.dir}" destdir="${test.classes.dir}" includeantruntime="false"
+               release="11" debug="true">
+            <classpath location="${classes.dir}"/>
+        </javac>
+    </target>
+
+    <target name="test" depends="compile-tests" description="Run the test suite">
+        <java classname="com.meteredblockingqueue.MeteredBlockingQueueTest"
+              fork="true" failonerror="true">
+            <classpath>
+                <pathelement location="${classes.dir}"/>
+                <pathelement location="${test.classes.dir}"/>
+            </classpath>
+        </java>
+    </target>
+
+    <target name="jar" depends="compile" description="Build dist/MeteredBlockingQueue.jar">
+        <mkdir dir="${dist.dir}"/>
+        <jar destfile="${dist.dir}/MeteredBlockingQueue.jar" basedir="${classes.dir}"/>
+    </target>
+
+    <target name="clean" description="Delete build output">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+</project>
